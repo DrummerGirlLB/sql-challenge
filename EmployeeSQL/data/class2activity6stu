@@ -1,0 +1,180 @@
+select count (*) from film;
+--or name column header in view
+select count (*) as "total films"
+from film;
+
+select rating, count(film_id) as "total films"
+from film
+group by rating;
+
+select distinct rental_duration from film
+
+select avg(rental_duration) as "average rental rate"
+from film
+group by rental_duration; 
+
+select rental_duration, rating, avg(rental_rate) as "min"
+from film
+group by rental_duration, rating
+having avg(rental_rate) > 3
+order by 1, 2;
+
+select * from film
+
+select avg(rental_rate)
+from film;
+--What is the average rental cost of films by rating? 
+--On average, what is the cheapest rating of films to rent? 
+--What is the most expensive?
+select rating, avg(rental_rate)
+from film
+group by rating
+order by 1,2;
+
+select rating, sum(replacement_cost)
+from film
+group by rating
+order by 1,2;
+
+select max(length)
+from film;
+
+select title, min(length) as "length"
+from film
+group by title
+order by length desc
+limit 1;
+
+select * from actor
+
+select count(first_name) as "number of first name"
+from actor
+
+select first_name, count(first_name) as "count of name"
+from actor
+group by first_name
+order by "count of name" desc;
+
+select rating, round(avg(rental_duration),2) as "avg_rental_duration"
+from film
+group by rating
+order by rating asc;
+
+--Determine the top 10 average replace costs for movies by their length.
+
+select length, round(avg(replacement_cost),2) as avg_replacement_cost
+from film
+group by length
+order by avg_replacement_cost desc
+limit 10;
+
+--Using the city and country tables, 
+--determine the count of countries in descending order.
+
+select country.country, count(country.country) as "country count"
+from city
+join country on city.country_id = country.country_id
+group by country.country
+order by "country count" desc
+limit 10;
+
+
+/*
+In this activity, you will practice creating subqueries.
+Instructions
+List the names and ID numbers of cities that are in the following list: Qalyub, Qinhuangdao, Qomsheh, Quilmes.
+Display the districts in the above list of cities.
+Hint: Use the address and city tables.
+Bonus
+Using subqueries, find the first and last names of customers who reside in cities that begin with the letter Q.
+Hint: You will need to use three tables and more than one subquery.
+*/
+
+select city, city_id
+from city
+where city in ('Qalyub', 'Qinhuangdao', 'Qomsheh', 'Quilmes')
+
+select district
+from address
+where city_id in ('421', '422', '423', '424');
+
+select city, city_id
+from city
+where city in ('Qalyub', 'Qinhuangdao', 'Qomsheh', 'Quilmes')
+
+select district
+from address
+where city_id IN (
+	select city_id
+	from city
+	where city in ('Qalyub', 'Qinhuangdao', 'Qomsheh', 'Quilmes')
+);
+--bonus
+select first_name, last_name
+from customer
+where address_id in (
+	select address_id
+	from address
+	where city_id in (
+		select city_id 
+		from city
+		where city like 'Q%')
+)
+create view customernames as
+select a.first_name, a.last_name, b.address, c.city, d.country
+	from customer As a
+		join address As b 
+		On b.address_id=a.address_id
+			join city As c 
+			On c.city_id=b.city_id
+				join country As d 
+				On d.country_id=c.country_id
+where c.city like 'Q%';
+
+select * from customernames
+
+--Write a query to get the number of copies of a film title that exist in the inventory. 
+--The results should look like those shown in the following image. 
+--Your challenge is to use a subquery (a query embedded within another query) instead of a join
+select title, count(f.film_ID) as number_in_stock
+from inventory i
+join film f
+on i.film_id = f.film_id
+group by title 
+order by title asc
+limit 8
+
+create view title_count as
+select title, count(f.film_ID) as number_in_stock
+from inventory i
+join film f
+on i.film_id = f.film_id
+group by title 
+order by title asc
+
+drop view title_count
+
+select *
+from title_count
+where number_in_stock = 7
+order by title
+limit 8
+
+select * from film
+
+select film_id 
+from film
+where title = 'ALTER VICTORY'
+
+select *
+from film_actor
+where film_id = 18
+
+select *
+from film_actor
+where film_id in 
+	(select film_id 
+	from film
+	where title = 'ALTER VICTORY')
+
+

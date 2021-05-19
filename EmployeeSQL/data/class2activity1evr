@@ -1,0 +1,20 @@
+select count (*) from film;
+--or name column header in view
+select count (*) as "total films"
+from film;
+
+select rating, count(film_id) as "total films"
+from film
+group by rating;
+
+select distinct rental_duration from film
+
+select avg(rental_duration) as "average rental rate"
+from film
+group by rental_duration; 
+
+select rental_duration, rating, avg(rental_rate) as "min"
+from film
+group by rental_duration, rating
+having avg(rental_rate) > 3
+order by 1, 2;

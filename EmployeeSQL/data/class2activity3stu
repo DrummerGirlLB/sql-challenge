@@ -1,0 +1,46 @@
+select count (*) from film;
+--or name column header in view
+select count (*) as "total films"
+from film;
+
+select rating, count(film_id) as "total films"
+from film
+group by rating;
+
+select distinct rental_duration from film
+
+select avg(rental_duration) as "average rental rate"
+from film
+group by rental_duration; 
+
+select rental_duration, rating, avg(rental_rate) as "min"
+from film
+group by rental_duration, rating
+having avg(rental_rate) > 3
+order by 1, 2;
+
+select * from film
+
+select avg(rental_rate)
+from film;
+--What is the average rental cost of films by rating? 
+--On average, what is the cheapest rating of films to rent? 
+--What is the most expensive?
+select rating, avg(rental_rate)
+from film
+group by rating
+order by 1,2;
+
+select rating, sum(replacement_cost)
+from film
+group by rating
+order by 1,2;
+
+select max(length)
+from film;
+
+select title, min(length) as "length"
+from film
+group by title
+order by length desc
+limit 1;
