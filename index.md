@@ -9,7 +9,7 @@
   <section>
       <h1>Lora Brown</h1>
       <article>
-      <img src="C:\Users\drumm\Pictures\mustachcat.jpg" alt="Lora's Image">
+      <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fpublic-media.si-cdn.com%2Ffiler%2Fa0%2F15%2Fa015251a-6a1d-449c-bf13-8c1c129c4cc5%2Fegypt_kitty_mobile.jpg&imgrefurl=https%3A%2F%2Fwww.smithsonianmag.com%2Fhistory%2Fhistory-felines-narrated-and-illustrated-cat-180976368%2F&tbnid=vUQzNBzNv3gsxM&vet=12ahUKEwi7keCEqOvwAhWJlZ4KHbCpAxUQMygTegUIARDzAQ..i&docid=VDGTlmQTkDMyhM&w=600&h=350&itg=1&q=cat%20pics&ved=2ahUKEwi7keCEqOvwAhWJlZ4KHbCpAxUQMygTegUIARDzAQ" alt="Lora's Image">
   </section>
 
   <section>
